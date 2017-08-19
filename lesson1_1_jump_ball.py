@@ -44,4 +44,5 @@ for tmp_argv in sys.argv:
     else:
         print("invalid param: " + tmp_argv)
         exit(2)
-        
+
+print("test: o=" + option_o + " x=" + coordinate_x + " y=" + coordinate_x)
