@@ -6,10 +6,14 @@
 import sys
 
 # exit code
-EXIT_TOO_MANY_ARGVS = 5
+EXIT_NUM_ARGVS = 5
 EXIT_INVALID_PARAM = 2
 EXIT_NO_PARAM = 1
 EXIT_SUCCESS_END = 0
+
+# global value
+XY_SCOPE = list(range(1, 100))
+O_SCOPE = list(range(1, 5))
 
 
 def print_help():
@@ -24,44 +28,54 @@ def print_help():
     print("y: the y coordinate (10 default, 0 < y < 100, int)")
 
 
+def no1_1(coordinate_x, coordinate_y):
+    """
+        1.1 a hold ball
+    """
+    return
+
+
 def main():
     """
-        main fuction
+        main function
     """
+    # check the number of argvs
     if len(sys.argv) == 1:
         print_help()
         exit(EXIT_NO_PARAM)
-    # default value
-    coordinate_x = 5
-    coordinate_y = 10
-    option_o = 1
-    if len(sys.argv) > 4:
-        print("too many argvs")
+    if len(sys.argv) != 4:
+        print("Error: invalid number of argvs")
         print_help()
-        exit(EXIT_TOO_MANY_ARGVS)
-    # print(sys.argv[1:])
+        exit(EXIT_NUM_ARGVS)
+    """
+        x: coordinate_x
+        y: coordinate_y
+        o: option_o
+    """
+    # declaration for x, y, o
+    coordinate_x = 0
+    coordinate_y = 0
+    option_o = 0
+    # get params     
     for tmp_argv in sys.argv[1:]:
-        # print(tmp_argv[0:2])
         if tmp_argv[0:2] == "o=":
-            option_o = tmp_argv[2:]
-            # print("get o: " + option_o)
+            option_o = int(tmp_argv[2:])
         elif tmp_argv[0:2] == "x=":
-            coordinate_x = tmp_argv[2:]
-            # print("get x: " + coordinate_x)
+            coordinate_x = int(tmp_argv[2:])
         elif tmp_argv[0:2] == "y=":
-            coordinate_y = tmp_argv[2:]
-            # print("get y: " + coordinate_y)
+            coordinate_y = int(tmp_argv[2:])
         else:
-            # print("invalid param: " + tmp_argv)
+            print("Error: invalid argvs")
+            print_help()
             exit(EXIT_INVALID_PARAM)
-    print("test: o=" + str(option_o) + \
-            " x=" + str(coordinate_x) + \
-            " y=" + str(coordinate_y))
-    x_in_range = coordinate_x in list(range(1, 100))
-    y_in_range = coordinate_y in list(range(1, 100))
-    print(x_in_range)
-    print(y_in_range)
-    if x_in_range and y_in_range:
+    # check params in valid scopes or not
+    x_in_range = coordinate_x in XY_SCOPE
+    y_in_range = coordinate_y in XY_SCOPE
+    o_in_range = option_o in O_SCOPE
+    if x_in_range and y_in_range and o_in_range:
+        # begin
+        if option_o == 1:
+            pass
         exit(EXIT_SUCCESS_END)
     else:
         print("Error: please make x and y in a valid range")
