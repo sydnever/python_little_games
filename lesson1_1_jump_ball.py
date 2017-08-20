@@ -2,8 +2,9 @@
 """
     Lesson 1.1 A jump ball
 """
-# import os
+import os
 import sys
+import time
 
 # exit code
 EXIT_NUM_ARGVS = 5
@@ -30,9 +31,27 @@ def print_help():
 
 def no1_1(coordinate_x, coordinate_y):
     """
-        1.1 a hold ball
+        1.1 show a hold ball
     """
-    return
+    for i in range(coordinate_y):
+        print("")
+    for i in range(coordinate_x):
+        print(" ", end='')
+    print("o")
+
+
+def no1_2(coordinate_x, coordinate_y):
+    """
+        1.1 a failing ball
+    """
+    for i in range(coordinate_y):
+        time.sleep(0.1)
+        os.system("reset")
+        for j in range(i):
+            print("")
+        for k in range(coordinate_x):
+            print(" ", end='')
+        print("o")
 
 
 def main():
@@ -45,7 +64,6 @@ def main():
         exit(EXIT_NO_PARAM)
     if len(sys.argv) != 4:
         print("Error: invalid number of argvs")
-        print_help()
         exit(EXIT_NUM_ARGVS)
     """
         x: coordinate_x
@@ -56,8 +74,12 @@ def main():
     coordinate_x = 0
     coordinate_y = 0
     option_o = 0
-    # get params     
+    # get params
     for tmp_argv in sys.argv[1:]:
+        if len(tmp_argv) < 3:
+            # check NULL params
+            print("Error: invalid argvs")
+            exit(EXIT_INVALID_PARAM)
         if tmp_argv[0:2] == "o=":
             option_o = int(tmp_argv[2:])
         elif tmp_argv[0:2] == "x=":
@@ -66,7 +88,6 @@ def main():
             coordinate_y = int(tmp_argv[2:])
         else:
             print("Error: invalid argvs")
-            print_help()
             exit(EXIT_INVALID_PARAM)
     # check params in valid scopes or not
     x_in_range = coordinate_x in XY_SCOPE
@@ -75,7 +96,9 @@ def main():
     if x_in_range and y_in_range and o_in_range:
         # begin
         if option_o == 1:
-            pass
+            no1_1(coordinate_x, coordinate_y)
+        elif option_o == 2:
+            no1_2(coordinate_x, coordinate_y)            
         exit(EXIT_SUCCESS_END)
     else:
         print("Error: please make x and y in a valid range")
