@@ -42,7 +42,7 @@ def no1_1(coordinate_x, coordinate_y):
 
 def no1_2(coordinate_x, coordinate_y):
     """
-        1.1 a failing ball
+        1.2 a failing ball
     """
     for i in range(coordinate_y):
         time.sleep(0.1)
@@ -53,6 +53,52 @@ def no1_2(coordinate_x, coordinate_y):
             print(" ", end='')
         print("o")
 
+
+def no1_3(coordinate_x, coordinate_y):
+    """
+        1.3 a bouncing ball: up to down / down to up
+    """
+    velocity = 1
+    height = 20
+    for n in range(100):
+        coordinate_y += velocity
+        os.system("reset")
+        for i in range(coordinate_y):
+            print(str(i) + "")
+        for j in range(coordinate_x):
+            print(str(j) + " ", end='')
+        print('oOo')
+        time.sleep(0.01)
+        if coordinate_y == height or coordinate_y == 0:
+            velocity = -velocity
+
+
+def no1_4(coordinate_x, coordinate_y):
+    """
+        1.4 a bouncing ball: along diagonal lines
+    """
+    x = 5
+    y = 0
+    velocity_x = 1
+    velocity_y = 1
+    left = 0
+    right = coordinate_x
+    top = 0
+    bottom = coordinate_y
+    for i in range(100):
+        x += velocity_x
+        y += velocity_y
+        os.system("reset")
+        for m in range(y):
+            print("")
+        for n in range(x):
+            print(' ', end='')
+        print("o")
+        if y == top or y == bottom:
+            velocity_y = -velocity_y
+        if x == left or x == right:
+            velocity_x = -velocity_x
+    
 
 def main():
     """
@@ -98,7 +144,11 @@ def main():
         if option_o == 1:
             no1_1(coordinate_x, coordinate_y)
         elif option_o == 2:
-            no1_2(coordinate_x, coordinate_y)            
+            no1_2(coordinate_x, coordinate_y)
+        elif option_o == 3:
+            no1_3(coordinate_x, coordinate_y)
+        elif option_o == 4:
+            no1_4(coordinate_x, coordinate_y)
         exit(EXIT_SUCCESS_END)
     else:
         print("Error: please make x and y in a valid range")

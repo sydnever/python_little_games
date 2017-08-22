@@ -1,4 +1,8 @@
 #!/usr/bin/env python3
+"""
+    test for lesson 1.1
+"""
+
 import os
 import random
 
@@ -66,7 +70,7 @@ def main():
     print("#********** test begin **********")
     # for i in range(5):
     #     test(1, 99, 1, 1)
-    test(10, 20, 2, 2)
+    test(5, 10, 4, 4)
 
 
 if __name__ == "__main__":
